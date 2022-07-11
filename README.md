@@ -1,12 +1,19 @@
-# Health up
-Es un servicio ofrecido a los usuarios que quieren ser saludables
-- Spa
-- Gym
-- ✨Solarium ✨
 
+# Project Health Up
 
-## License
+En este proyecto podrán encontrar un app de reservas de turnos para el gimnasio Health UP.
 
-MIT
+## Authors
 
-**Free Software**
+- [@jhosymijares](https://www.github.com/jhosymijares)
+
+## Demo
+
+WIP: Insert gif or link to demo
+
+## Features
+
+- Users: modelo de usuarios con perfil administrador, para registrar las reservas.
+- Category: modelo de categorías de servicios para las reservas.
+- Service: modelo con la lista de servicios por categoría para las reservas.
+- Booking: modelo con las lista de reservas realizadas por el usuario administrador, para los turnos disponibles en el gimnasio.
