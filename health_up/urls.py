@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from health.views import set_service
+from health.views import set_user
+from health.views import set_booking
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('service/', set_service),
+    path('user/',set_user),
+    path('booking/',set_booking)
 ]

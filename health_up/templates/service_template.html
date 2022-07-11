@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Service Detail:</h1>
+    <form method="post" action="/service/">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="service_name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="service_name" name="name" aria-describedby="service_name_help">
+            <div id="service_name_help" class="form-text">Please indicate the service name</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="service_description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="service_description" name="description" aria-describedby="service_description_help">
+            <div id="service_description_help" class="form-text">Please indicate the description</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <input type="checkbox" class="form-control" id="status" name="status" aria-describedby="service_status_help">
+            <div id="service_status_help" class="form-text">Please indicate the status</div>
+        </div>        
+        
+        <button type="submit" class="btn btn-primary">Accept</button>
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for service in services %}
+                <td>{{service.id}}</td>
+                <td>{{service.name}}</td>
+                <td>{{service.description}}</td>
+                <td>{{service.status}}</td>
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

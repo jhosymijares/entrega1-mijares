@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>User Detail:</h1>
+    <form method="post" action="/user/">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="user_name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="user_name" name="name" aria-describedby="user_name_help">
+            <div id="user_name_help" class="form-text">Please indicate the user name</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="user_last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="user_last_name" name="lastname" aria-describedby="user_last_name_help">
+            <div id="user_last_name_help" class="form-text">Please indicate the user last name</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="user_email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="user_email" name="email" aria-describedby="user_email_help">
+            <div id="user_email_help" class="form-text">Please indicate the user email</div>
+        </div>       
+        
+        <div class="mb-3">
+            <label for="user_phone" class="form-label">Phone</label>
+            <input type="number" class="form-control" id="user_phone" name="phone" aria-describedby="user_phone_help">
+            <div id="user_phone_help" class="form-text">Please indicate the user phone</div>
+        </div>  
+        
+        <button type="submit" class="btn btn-primary">Accept</button>
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for user in users %}
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
