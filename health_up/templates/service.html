@@ -45,7 +45,12 @@
                     <td>{{service.id}}</td>
                     <td>{{service.name}}</td>
                     <td>{{service.description}}</td>
-                    <td>{{service.status}}</td>
+                    <td>{% if service.status == True%}
+                            Habilitado
+                        {% else %}
+                            Deshabilitado
+                        {% endif %}
+                    </td>
                 </tr>
                     {% endfor %}
             </tbody>
