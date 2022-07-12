@@ -85,6 +85,7 @@ def booking_view(self):
     for data in booking_data:
         data.client= client.objects.filter(id=data.id_client).first()
         data.service= service.objects.filter(id=data.id_service).first()
+        data.date_creation= data.creation.strftime('%a %d-%B-%Y, %I:%M %p')
 
     booking_dic={
         "bookings": booking_data,
@@ -107,18 +108,23 @@ def search_view(self):
     value = self.POST.get("value")   
     if value is None: 
         return redirect('/booking')
-    result_search=booking.objects.filter(Q(note__contains=value) | Q(creation__contains=value) | Q(id_client__contains=value) | Q(id_service__contains=value))
-    for result in result_search:
+    booking_data=booking.objects.filter(Q(note__contains=value) | Q(creation__contains=value) | Q(id_client__contains=value) | Q(id_service__contains=value))
+    for data in booking_data:
+        data.client= client.objects.filter(id=data.id_client).first()
+        data.service= service.objects.filter(id=data.id_service).first()
+        data.date_creation= data.creation.strftime('%a %d-%B-%Y, %I:%M %p')
+
+    for result in booking_data:
         print(f"""Booking Search Detail:
                         Id: {result.id}
                         Id Client:{result.id_client}
                         Id Service:{result.id_service}
                         Creation:{result.creation}
-                        Note:{result.note}
-                """)
+                        Note:{result.note}""")
+
     result_dic={
         "value":value,
-        "search_result":result_search}
+        "search_result":booking_data}
     search_template = loader.get_template('search.html')
     search_render = search_template.render(result_dic)
     return HttpResponse(search_render)

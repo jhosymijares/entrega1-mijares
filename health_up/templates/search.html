@@ -11,21 +11,19 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Service</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Service Name</th>
                 <th scope="col">Note</th>
-                <th scope="col">Creation</th>
+                <th scope="col">Creation Date</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 {% for result in search_result %}
-                <td>{{result.id}}</td>
-                <td>{{result.id_client}}</td>
-                <td>{{result.id_service}}</td>
+                <td>{{result.client.name}} {{result.client.lastname}}</td>
+                <td>{{result.service.name}}</td>
                 <td>{{result.note}}</td>
-                <td>{{result.creation}}</td>
+                <td>{{result.date_creation}}</td>
             </tr>
                 {% endfor %}
         </tbody>

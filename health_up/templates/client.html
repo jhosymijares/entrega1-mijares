@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-   User Health
+   Client Detail Health up
 {% endblock %}
 
 {% block content %}
@@ -39,7 +39,6 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
@@ -49,7 +48,6 @@
             <tbody>                
                 {% for client in clients %}
                 <tr>
-                    <td>{{client.id}}</td>
                     <td>{{client.name}}</td>
                     <td>{{client.lastname}}</td>
                     <td>{{client.email}}</td>

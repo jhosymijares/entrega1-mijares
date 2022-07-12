@@ -16,5 +16,5 @@ class service(models.Model):
 class booking(models.Model):
     id_client = models.IntegerField()
     id_service = models.IntegerField()
-    creation = models.DateField()
+    creation = models.DateTimeField()
     note = models.CharField(max_length=200)
