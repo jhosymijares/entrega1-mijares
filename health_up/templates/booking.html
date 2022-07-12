@@ -45,21 +45,26 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Service</th>
                 <th scope="col">Note</th>
                 <th scope="col">Creation</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 {% for booking in bookings %}
-                <td>{{booking.id}}</td>
-                <td>{{booking.id_client}}</td>
-                <td>{{booking.id_service}}</td>
+                <td>{{booking.client.name}} {{booking.client.lastname}}</td>
+                <td>{{booking.service.name}}</td>
                 <td>{{booking.note}}</td>
                 <td>{{booking.creation}}</td>
+                <td>
+                    <form method="post" action="/booking/">
+                        <input type="hidden" name="id_booking" value="{{booking.id}}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
                 {% endfor %}
         </tbody>

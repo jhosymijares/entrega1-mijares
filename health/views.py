@@ -81,13 +81,26 @@ def booking_view(self):
                 Creation: {booking_model.creation}
                 Note: {booking_model.note}""")
 
+    booking_data=booking.objects.all()
+    for data in booking_data:
+        data.client= client.objects.filter(id=data.id_client).first()
+        data.service= service.objects.filter(id=data.id_service).first()
+
     booking_dic={
-        "bookings": booking.objects.all(),
+        "bookings": booking_data,
         "clients": client.objects.all(),
         "services": service.objects.filter(status=True)}
 
     booking_template = loader.get_template('booking.html')
     booking_render = booking_template.render(booking_dic)
+
+    # to delete an indicate booking
+    if self.POST.get("id_booking") is not None:
+        id_booking= self.POST.get("id_booking")
+        booking_selected = booking.objects.get(id=id_booking)
+        booking_selected.delete()
+        return redirect('/booking')
+
     return HttpResponse(booking_render)
 
 def search_view(self):
