@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Booking Health up
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Booking Detail:</h1>
+    <form method="post" action="/booking/">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="user_name" class="form-label">User</label>
+            <select class="form-select form-select-lg mb-3" name="username" aria-label=".form-select-lg example" aria-describedby="user_name_help">
+                <option selected>Please indicate the user</option>
+                {% for user in users %}
+                    <option value={{user.id}}>{{user.name}} {{user.last_name}}</option>
+                {% endfor %}
+              </select>              
+            
+            <div id="user_name_help" class="form-text">Please indicate the user</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="user_name" class="form-label">Service</label>
+            <select class="form-select form-select-lg mb-3" name="service" aria-label=".form-select-lg example" aria-describedby="user_service_help">
+                <option selected>Please indicate the service</option>
+                {% for service in services %}
+                    <option value={{service.id}}>{{service.name}}</option>
+                {% endfor %}
+              </select>              
+            
+            <div id="user_service_help" class="form-text">Please indicate the service</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Note</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="3" aria-describedby="booking_note_help"></textarea>
+            <div id="booking_note_help" class="form-text">Please indicate the note</div>
+          </div>
+        
+        <button type="submit" class="btn btn-primary">Accept</button>
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for booking in bookings %}
+                <td>{{booking.id}}</td>
+                <td>{{booking.iduser}}</td>
+                <td>{{booking.idservice}}</td>
+                <td>{{booking.note}}</td>
+                <td>{{booking.creation}}</td>
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
+   
+{% endblock %}
