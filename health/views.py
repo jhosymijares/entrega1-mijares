@@ -90,20 +90,22 @@ def booking_view(self):
     booking_render = booking_template.render(booking_dic)
     return HttpResponse(booking_render)
 
-def search(self):
+def search_view(self):
     value = self.POST.get("value")   
     if value is None: 
         return redirect('/booking')
-    result_search=booking.objects.filter(Q(note__contains=value) | Q(creation__contains=value) | Q(iduser__contains=value) | Q(idservice__contains=value))
+    result_search=booking.objects.filter(Q(note__contains=value) | Q(creation__contains=value) | Q(id_client__contains=value) | Q(id_service__contains=value))
     for result in result_search:
         print(f"""Booking Search Detail:
                         Id: {result.id}
-                        IdUser:{result.iduser}
-                        IdService:{result.idservice}
+                        Id Client:{result.id_client}
+                        Id Service:{result.id_service}
                         Creation:{result.creation}
                         Note:{result.note}
                 """)
-    result_dic={"value":value,"search_result":result_search}
-    template = loader.get_template('search.html')
-    render = template.render(result_dic)
-    return HttpResponse(render)
+    result_dic={
+        "value":value,
+        "search_result":result_search}
+    search_template = loader.get_template('search.html')
+    search_render = search_template.render(result_dic)
+    return HttpResponse(search_render)

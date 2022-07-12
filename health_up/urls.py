@@ -18,12 +18,12 @@ from django.urls import path
 from health.views import client_view
 from health.views import service_view
 from health.views import booking_view
-from health.views import search
+from health.views import search_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('client/', client_view),
     path('service/', service_view),
     path('booking/', booking_view),
-    path('search/', search)
+    path('search/', search_view)
 ]
