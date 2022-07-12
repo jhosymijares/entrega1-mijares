@@ -10,7 +10,7 @@
         <form method="post" action="/service/">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="service_name" class="form-label">Name</label>
+                <label for="service_name" class="form-label">Service Name</label>
                 <input type="text" class="form-control" id="service_name" name="name" aria-describedby="service_name_help">
                 <div id="service_name_help" class="form-text">Please indicate the service name</div>
             </div>
@@ -18,13 +18,13 @@
             <div class="mb-3">
                 <label for="service_description" class="form-label">Description</label>
                 <input type="text" class="form-control" id="service_description" name="description" aria-describedby="service_description_help">
-                <div id="service_description_help" class="form-text">Please indicate the description</div>
+                <div id="service_description_help" class="form-text">Please indicate the service description</div>
             </div>
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <input type="checkbox" class="form-check-input" id="status" name="status" aria-describedby="service_status_help">
-                <div id="service_status_help" class="form-text">Please indicate the status</div>                                                   
+                <div id="service_status_help" class="form-text">Please indicate the service status</div>                                                   
             </div>        
             
             <button type="submit" class="btn btn-primary">Accept</button>
