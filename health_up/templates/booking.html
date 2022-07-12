@@ -11,26 +11,26 @@
         {% csrf_token %}
         <div class="mb-3">
             <label for="user_name" class="form-label">Client Name</label>
-            <select class="form-select form-select-lg mb-3" name="username" aria-label=".form-select-lg example" aria-describedby="user_name_help">
-                <option selected>Please indicate the client name</option>
-                {% for user in users %}
-                    <option value={{user.id}}>{{user.name}} {{user.last_name}}</option>
+            <select class="form-select form-select-lg mb-3" name="client" aria-label=".form-select-lg example" aria-describedby="user_name_help">
+                <option selected value="-1">Please indicate the client name</option>
+                {% for client in clients %}
+                    <option value={{client.id}}>{{client.name}} {{client.lastname}}</option>
                 {% endfor %}
               </select>              
             
-            <div id="user_name_help" class="form-text">Please indicate the user</div>
+            <div id="user_name_help" class="form-text">Please indicate the client name</div>
         </div>
 
         <div class="mb-3">
             <label for="user_name" class="form-label">Service Name</label>
             <select class="form-select form-select-lg mb-3" name="service" aria-label=".form-select-lg example" aria-describedby="user_service_help">
-                <option selected>Please indicate the service name</option>
+                <option value="-1" selected>Please indicate the service name</option>
                 {% for service in services %}
                     <option value={{service.id}}>{{service.name}}</option>
                 {% endfor %}
               </select>              
             
-            <div id="user_service_help" class="form-text">Please indicate the service</div>
+            <div id="user_service_help" class="form-text">Please indicate the service name</div>
         </div>
 
         <div class="mb-3">
@@ -56,8 +56,8 @@
             <tr>
                 {% for booking in bookings %}
                 <td>{{booking.id}}</td>
-                <td>{{booking.iduser}}</td>
-                <td>{{booking.idservice}}</td>
+                <td>{{booking.id_client}}</td>
+                <td>{{booking.id_service}}</td>
                 <td>{{booking.note}}</td>
                 <td>{{booking.creation}}</td>
             </tr>

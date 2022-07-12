@@ -17,13 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from health.views import client_view
 from health.views import service_view
-from health.views import set_booking
+from health.views import booking_view
 from health.views import search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('client/', client_view),
     path('service/', service_view),
-    path('booking/',set_booking),
-    path('search/',search)
+    path('booking/', booking_view),
+    path('search/', search)
 ]

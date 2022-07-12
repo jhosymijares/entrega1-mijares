@@ -14,7 +14,7 @@ class service(models.Model):
     status = models.BooleanField()
 
 class booking(models.Model):
-    idclient = models.IntegerField()
-    idservice = models.IntegerField()
+    id_client = models.IntegerField()
+    id_service = models.IntegerField()
     creation = models.DateField()
     note = models.CharField(max_length=200)

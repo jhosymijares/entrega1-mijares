@@ -54,42 +54,41 @@ def service_view(self):
                 Name: {service_model.name}
                 Description: {service_model.description}
                 Status: {service_model.status}
-                Service Status: {service_status}
-        """)
+                Service Status: {service_status}""")
         
-    #service_dic ={"services": service.objects.filter(status=True)}
     service_dic ={"services": service.objects.all()}
+    service_template = loader.get_template('service.html')
+    service_render = service_template.render(service_dic)
 
-    template = loader.get_template('service.html')
-    render = template.render(service_dic)
+    return HttpResponse(service_render)
 
-    return HttpResponse(render)
-
-def set_booking(self):
-    id_user = self.POST.get("username")
+def booking_view(self):
+    id_client = self.POST.get("client")
     id_service = self.POST.get("service")
     note = self.POST.get("note")
-
-
-    if (id_user is not None and id_service is not None and note is not None):
+  
+    if (id_client is not None and id_client != "-1" and id_service is not None and id_service != "-1" and note is not None):
         booking_model = booking(
-            iduser = id_user,
-            idservice = id_service,
+            id_client = id_client,
+            id_service = id_service,
             creation = datetime.datetime.now(),
             note = note
         )
         booking_model.save()
         print(f"""Booking Detail:
-                    User id Seleted: {booking_model.iduser}
-                    Service id Selected: {booking_model.idservice}
-                    Creation: {booking_model.creation}
-                    Note: {booking_model.note}
-            """)
+                Client Seleted: {booking_model.id_client}
+                Service Selected: {booking_model.id_service}
+                Creation: {booking_model.creation}
+                Note: {booking_model.note}""")
 
-    booking_dic={"bookings":booking.objects.all(),"users":user.objects.all(),"services":service.objects.all()}
-    template = loader.get_template('booking.html')
-    render = template.render(booking_dic)
-    return HttpResponse(render)
+    booking_dic={
+        "bookings": booking.objects.all(),
+        "clients": client.objects.all(),
+        "services": service.objects.filter(status=True)}
+
+    booking_template = loader.get_template('booking.html')
+    booking_render = booking_template.render(booking_dic)
+    return HttpResponse(booking_render)
 
 def search(self):
     value = self.POST.get("value")   
