@@ -3,12 +3,13 @@ from re import template
 #from cairo import Status
 import django
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.template import loader
 from health.models import service
 from health.models import user
 from health.models import booking
 import datetime
+from django.db.models import Q
 
 # Create your views here.
 
@@ -91,4 +92,22 @@ def set_booking(self):
     booking_dic={"bookings":booking.objects.all(),"users":user.objects.all(),"services":service.objects.all()}
     template = loader.get_template('booking.html')
     render = template.render(booking_dic)
+    return HttpResponse(render)
+
+def search(self):
+    value = self.POST.get("value")   
+    if value is None: 
+        return redirect('/booking')
+    result_search=booking.objects.filter(Q(note__contains=value) | Q(creation__contains=value) | Q(iduser__contains=value) | Q(idservice__contains=value))
+    for result in result_search:
+        print(f"""Booking Search Detail:
+                        Id: {result.id}
+                        IdUser:{result.iduser}
+                        IdService:{result.idservice}
+                        Creation:{result.creation}
+                        Note:{result.note}
+                """)
+    result_dic={"value":value,"search_result":result_search}
+    template = loader.get_template('search.html')
+    render = template.render(result_dic)
     return HttpResponse(render)

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+   Result Search Health up
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <label for="service_description" class="form-label">Result Search for value: <b>"{{value}}"</b></label>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Service</th>
+                <th scope="col">Note</th>
+                <th scope="col">Creation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for result in search_result %}
+                <td>{{result.id}}</td>
+                <td>{{result.iduser}}</td>
+                <td>{{result.idservice}}</td>
+                <td>{{result.note}}</td>
+                <td>{{result.creation}}</td>
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
