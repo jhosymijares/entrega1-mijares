@@ -6,13 +6,13 @@
 
 {% block content %}
     <div class="container">
-        <h1>User Detail:</h1>
-        <form method="post" action="/user/">
+        <h1>Client Detail:</h1>
+        <form method="post" action="/client/">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="user_name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="user_name" name="name" aria-describedby="user_name_help">
-                <div id="user_name_help" class="form-text">Please indicate the user name</div>
+                <div id="user_name_help" class="form-text">Please indicate the client name</div>
             </div>
 
             <div class="mb-3">
@@ -46,16 +46,16 @@
                     <th scope="col">Phone</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>                
+                {% for client in clients %}
                 <tr>
-                    {% for user in users %}
-                    <td>{{user.id}}</td>
-                    <td>{{user.name}}</td>
-                    <td>{{user.last_name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.phone}}</td>
+                    <td>{{client.id}}</td>
+                    <td>{{client.name}}</td>
+                    <td>{{client.lastname}}</td>
+                    <td>{{client.email}}</td>
+                    <td>{{client.phone}}</td>
                 </tr>
-                    {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
     </div>

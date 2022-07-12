@@ -6,14 +6,38 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.template import loader
 from health.models import service
-from health.models import user
+from health.models import client
 from health.models import booking
 import datetime
 from django.db.models import Q
 
-# Create your views here.
+def client_view(self): 
+    client_name = self.POST.get('name')
+    client_lastname = self.POST.get('lastname')
+    client_email = self.POST.get('email')
+    client_phone = self.POST.get('phone')
 
-def set_service(self):
+    if (client_name is not None and client_lastname is not None or client_email is not None and client_phone is not None):
+        client_model = client(
+            name = client_name,
+            lastname = client_lastname,
+            email = client_email,
+            phone = client_phone
+        )
+        client_model.save()
+    
+        print(f"""Client Detail:
+                Name: {client_model.name}
+                Last Name: {client_model.lastname}
+                Email: {client_model.email}
+                Phone: {client_model.phone}""")
+
+    client_dic ={"clients":client.objects.all()}
+    client_template = loader.get_template("client.html")
+    client_render = client_template.render(client_dic)
+    return HttpResponse(client_render)
+
+def service_view(self):
     service_name = self.POST.get('name')
     service_description = self.POST.get('description')
     service_status = self.POST.get('status')
@@ -39,33 +63,6 @@ def set_service(self):
     template = loader.get_template('service.html')
     render = template.render(service_dic)
 
-    return HttpResponse(render)
-
-def set_user(self): 
-    user_name = self.POST.get('name')
-    user_lastname = self.POST.get('lastname')
-    user_email = self.POST.get('email')
-    user_phone = self.POST.get('phone')
-
-    if (user_name is not None and user_lastname is not None or user_email is not None and user_phone is not None):
-        user_model = user(
-            name = user_name,
-            last_name = user_lastname,
-            email = user_email,
-            phone = user_phone
-        )
-        user_model.save()
-    
-        print(f"""User Detail:
-                Name: {user_model.name}
-                Last Name: {user_model.last_name}
-                Email: {user_model.email}
-                Phone: {user_model.phone}
-        """)
-
-    user_dic ={"users":user.objects.all()}
-    template = loader.get_template("user.html")
-    render = template.render(user_dic)
     return HttpResponse(render)
 
 def set_booking(self):

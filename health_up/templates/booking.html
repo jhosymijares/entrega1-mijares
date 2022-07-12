@@ -10,9 +10,9 @@
     <form method="post" action="/booking/">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="user_name" class="form-label">User</label>
+            <label for="user_name" class="form-label">Client Name</label>
             <select class="form-select form-select-lg mb-3" name="username" aria-label=".form-select-lg example" aria-describedby="user_name_help">
-                <option selected>Please indicate the user</option>
+                <option selected>Please indicate the client name</option>
                 {% for user in users %}
                     <option value={{user.id}}>{{user.name}} {{user.last_name}}</option>
                 {% endfor %}
@@ -22,9 +22,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="user_name" class="form-label">Service</label>
+            <label for="user_name" class="form-label">Service Name</label>
             <select class="form-select form-select-lg mb-3" name="service" aria-label=".form-select-lg example" aria-describedby="user_service_help">
-                <option selected>Please indicate the service</option>
+                <option selected>Please indicate the service name</option>
                 {% for service in services %}
                     <option value={{service.id}}>{{service.name}}</option>
                 {% endfor %}

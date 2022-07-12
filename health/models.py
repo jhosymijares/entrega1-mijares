@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 
-class user(models.Model):
+class client(models.Model):
     name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     phone = models.IntegerField()
 
@@ -14,7 +14,7 @@ class service(models.Model):
     status = models.BooleanField()
 
 class booking(models.Model):
-    iduser = models.IntegerField()
+    idclient = models.IntegerField()
     idservice = models.IntegerField()
     creation = models.DateField()
     note = models.CharField(max_length=200)
