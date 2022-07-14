@@ -24,14 +24,15 @@ python manage.py runserver
 
 ## Features
 
-- Ingresar al modelo de [Client](http://localhost:8000/client)
+- Ingresar al modelo de [Client Detail](http://localhost:8000/client)
  Modelo con la lista de clientes y sus datos personales para registrar la reserva posteriormente, en esta sección se pueden agregar registros.
 
--  Ingresar al modelo de [Service](http://localhost:8000/service) 
+-  Ingresar al modelo de [Service Detail](http://localhost:8000/service) 
 Modelo con la lista de servicios para las reservas, en esta seción se pueden agregar registros de clientes por los momentos no cuenta con validaciones.
 
-- Ingresar al modelo de [Booking](http://localhost:8000/booking) 
+- Ingresar al modelo de [Booking Detail](http://localhost:8000/booking) 
 Modelo con las lista de reservas realizadas por el usuario administrador, para los servicios disponibles en el gimnasio, en esta sección se pueden agregar y eliminar registros.
 
-- Ingresar al modelo de [Search](http://localhost:8000/search) 
-Desde este modelo también podrás realizar búsquedas de las reservas 'booking' por los siguientes campos: 'Creation Date' and 'Note'. Este buscador lo podrá encontrar desde cualquier ubicación en la app.
+Desde este modelo también podrás realizar búsquedas de las reservas [Booking Detail](http://localhost:8000/booking) por alguno de los siguientes campos: 'Creation Date' and 'Note'. Este buscador lo podrá encontrar desde cualquier ubicación en la app.
+
+#Healp Up
