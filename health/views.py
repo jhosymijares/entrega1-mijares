@@ -5,9 +5,9 @@ import django
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.template import loader
-from health.models import service
-from health.models import client
-from health.models import booking
+from health.models import Service
+from health.models import Client
+from health.models import Booking
 import datetime
 from django.db.models import Q
 
@@ -18,7 +18,7 @@ def client_view(self):
     client_phone = self.POST.get('phone')
 
     if (client_name is not None and client_lastname is not None or client_email is not None and client_phone is not None):
-        client_model = client(
+        client_model = Client(
             name = client_name,
             lastname = client_lastname,
             email = client_email,
@@ -32,7 +32,7 @@ def client_view(self):
                 Email: {client_model.email}
                 Phone: {client_model.phone}""")
 
-    client_dic ={"clients":client.objects.all()}
+    client_dic ={"clients":Client.objects.all()}
     client_template = loader.get_template("client.html")
     client_render = client_template.render(client_dic)
     return HttpResponse(client_render)
@@ -43,7 +43,7 @@ def service_view(self):
     service_status = self.POST.get('status')
 
     if (service_name is not None and service_description is not None or service_status is not None):
-        service_model = service(
+        service_model = Service(
             name = service_name,
             description = service_description,
             status = True if service_status == 'on' else False
@@ -56,7 +56,7 @@ def service_view(self):
                 Status: {service_model.status}
                 Service Status: {service_status}""")
         
-    service_dic ={"services": service.objects.all()}
+    service_dic ={"services": Service.objects.all()}
     service_template = loader.get_template('service.html')
     service_render = service_template.render(service_dic)
 
@@ -68,7 +68,7 @@ def booking_view(self):
     note = self.POST.get("note")
   
     if (id_client is not None and id_client != "-1" and id_service is not None and id_service != "-1" and note is not None):
-        booking_model = booking(
+        booking_model = Booking(
             id_client = id_client,
             id_service = id_service,
             creation = datetime.datetime.now(),
@@ -81,16 +81,16 @@ def booking_view(self):
                 Creation: {booking_model.creation}
                 Note: {booking_model.note}""")
 
-    booking_data=booking.objects.all()
+    booking_data=Booking.objects.all()
     for data in booking_data:
-        data.client= client.objects.filter(id=data.id_client).first()
-        data.service= service.objects.filter(id=data.id_service).first()
+        data.client= Client.objects.filter(id=data.id_client).first()
+        data.service= Service.objects.filter(id=data.id_service).first()
         data.date_creation= data.creation.strftime('%a %d-%B-%Y, %I:%M %p')
 
     booking_dic={
         "bookings": booking_data,
-        "clients": client.objects.all(),
-        "services": service.objects.filter(status=True)}
+        "clients": Client.objects.all(),
+        "services": Service.objects.filter(status=True)}
 
     booking_template = loader.get_template('booking.html')
     booking_render = booking_template.render(booking_dic)
@@ -98,7 +98,7 @@ def booking_view(self):
     # to delete an indicate booking
     if self.POST.get("id_booking") is not None:
         id_booking= self.POST.get("id_booking")
-        booking_selected = booking.objects.get(id=id_booking)
+        booking_selected = Booking.objects.get(id=id_booking)
         booking_selected.delete()
         return redirect('/booking')
 
@@ -108,10 +108,10 @@ def search_view(self):
     value = self.POST.get("value")   
     if value is None: 
         return redirect('/booking')
-    booking_data=booking.objects.filter(Q(note__contains=value) | Q(creation__contains=value) | Q(id_client__contains=value) | Q(id_service__contains=value))
+    booking_data=Booking.objects.filter(Q(note__contains=value) | Q(creation__contains=value) | Q(id_client__contains=value) | Q(id_service__contains=value))
     for data in booking_data:
-        data.client= client.objects.filter(id=data.id_client).first()
-        data.service= service.objects.filter(id=data.id_service).first()
+        data.client= Client.objects.filter(id=data.id_client).first()
+        data.service= Service.objects.filter(id=data.id_service).first()
         data.date_creation= data.creation.strftime('%a %d-%B-%Y, %I:%M %p')
 
     for result in booking_data:
