@@ -18,7 +18,7 @@ Para ejecutar esta app debe seguir los siguientes pasos:
 python manage.py runserver
 ```
 
-4. Ir al navegador y abrir el siguente enlace: [App: Healp Up](http://localhost:8000/)
+4. Ir al navegador y abrir el siguiente enlace: [App: Healp Up](http://localhost:8000/)
 
 5. Encontrarás 3 vistas en la web de la app (ver en la sección Features)
 
