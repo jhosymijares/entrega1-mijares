@@ -35,4 +35,6 @@ Modelo con las lista de reservas realizadas por el usuario administrador, para l
 
 Desde este modelo también podrás realizar búsquedas de las reservas [Booking Detail](http://localhost:8000/booking) por alguno de los siguientes campos: 'Creation Date' and 'Note'. Este buscador lo podrá encontrar desde cualquier ubicación en la app.
 
-#Healp Up
+## Healp Up
+
+
